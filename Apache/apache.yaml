@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: apache
+  labels:
+    app: apache
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: apache
+        tier: frontend
+    spec:
+      containers:
+      - image: jsevans/apache-opensuse:latest
+        name: apache
+        ports:
+        - containerPort: 80
+          name: apache
+        volumeMounts:
+        - name: apache-pv-1
+          mountPath: /srv/www/htdocs
+      volumes:
+      - name: apache-pv-1
+        persistentVolumeClaim:
+        claimName: apache-pvc-1
