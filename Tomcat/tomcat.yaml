@@ -21,8 +21,8 @@ spec:
           name: tomcat
         volumeMounts:
         - name: tomcat-pv-1
-          mountPath: /opt/tomcat/webapps
+          mountPath: /opt/tomcat/webapps/temp
       volumes:
       - name: tomcat-pv-1
         persistentVolumeClaim:
-claimName: tomcat-pvc-1
+        claimName: tomcat-pvc-1

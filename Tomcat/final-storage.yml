@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tomcat-storage
+  labels:
+    storage: tomcat
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server: 149.44.139.188
+    path: "/share"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: tomcat-storage
+  labels:
+    storage: tomcat
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
