@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tomcat
+  labels:
+    app: tomcat
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tomcat
+        tier: frontend
+    spec:
+      containers:
+      - image: jsevans/tomcat-opensuse
+        name: tomcat
+        ports:
+        - containerPort: 8080
+          name: tomcat
+        volumeMounts:
+        - name: tomcat-pv-1
+          mountPath: /opt/tomcat/webapps
+      volumes:
+      - name: tomcat-pv-1
+        persistentVolumeClaim:
+claimName: tomcat-pvc-1
